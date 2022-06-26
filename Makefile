@@ -51,3 +51,10 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 
 cc: c=c:c ## Clear the cache
 cc: sf
+
+## —— Fixers 🔧 ———————————————————————————————————————————————————————————————
+phpstan: ## Run PHPStan
+	@$(PHP) vendor/bin/phpstan analyse -c phpstan.neon --no-progress --no-interaction
+
+phpcs: ## Run PHP Code Sniffer
+	@$(PHP) vendor/bin/php-cs-fixer fix --allow-risky=yes
