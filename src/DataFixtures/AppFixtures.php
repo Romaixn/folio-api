@@ -10,7 +10,6 @@ use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use function Symfony\Component\String\u;
 
 class AppFixtures extends Fixture
 {
@@ -64,6 +63,7 @@ class AppFixtures extends Fixture
             $project->setDescription($description);
             $project->setUrl($url);
             $project->addCategory(...$categories);
+            $project->setIsPublished((bool) mt_rand(0, 1));
 
             $manager->persist($project);
         }
