@@ -153,19 +153,6 @@ class AppFixtures extends Fixture
         ];
     }
 
-    private function getRandomText(int $maxLength = 255): string
-    {
-        $phrases = $this->getPhrases();
-        shuffle($phrases);
-
-        do {
-            $text = u('. ')->join($phrases)->append('.');
-            array_pop($phrases);
-        } while ($text->length() > $maxLength);
-
-        return $text->toString();
-    }
-
     private function getRandomUrl(): string|null
     {
         return rand(0, 1) ? null : 'https://symfony.com';
