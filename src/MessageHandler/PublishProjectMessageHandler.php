@@ -5,27 +5,28 @@ declare(strict_types=1);
 namespace App\MessageHandler;
 
 use App\Entity\Project;
-use Psr\Log\LoggerInterface;
-use App\Repository\ProjectRepository;
 use App\Message\PublishProjectMessage;
+use App\Repository\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Workflow\WorkflowInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Workflow\WorkflowInterface;
 
 final class PublishProjectMessageHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private ProjectRepository $projectRepository,
-        private MessageBusInterface $bus,
-        private WorkflowInterface $projectStateMachine,
-        private LoggerInterface $logger
-    ) {}
+        private readonly EntityManagerInterface $entityManager,
+        private readonly ProjectRepository $projectRepository,
+        private readonly MessageBusInterface $bus,
+        private readonly WorkflowInterface $workflow,
+        private readonly LoggerInterface $logger
+    ) {
+    }
 
-    public function __invoke(PublishProjectMessage $message)
+    public function __invoke(PublishProjectMessage $message): void
     {
-        /** @var Project $project */
+        /** @var Project|null $project */
         $project = $this->projectRepository->find($message->getId());
         if (!$project) {
             return;
@@ -49,8 +50,8 @@ final class PublishProjectMessageHandler implements MessageHandlerInterface
                 $this->workflow->apply($project, 'unpublish');
                 $this->entityManager->flush();
             }
-        } elseif ($this->logger) {
-            $this->logger->debug('Dropping project', ['project' => $project->getId(), 'state' => $project->getState()]);
         }
+
+        $this->logger->debug('Workflow Project', ['project' => $project->getId(), 'state' => $project->getState()]);
     }
 }

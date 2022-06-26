@@ -34,6 +34,6 @@ parameters:
 
     # Nothing ignored! (almost!) 🎉
     ignoreErrors:
-        # - '#Dead catch - Error is never thrown in the try block.#'
         # - '#Variable method call#'
+        # - '#Dead catch - Error is never thrown in the try block.#'
         # - '#to IntlDateFormatter constructor#' # @see Snippet197Trait

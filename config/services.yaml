@@ -20,7 +20,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    App\EntityListener\ProjectEntityListener:
+    App\EntityListener\ProjectListener:
         tags:
             - { name: 'doctrine.orm.entity_listener', event: 'prePersist', entity: 'App\Entity\Project'}
             - { name: 'doctrine.orm.entity_listener', event: 'postPersist', entity: 'App\Entity\Project'}

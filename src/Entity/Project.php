@@ -4,36 +4,53 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\ProjectRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 #[UniqueEntity(fields: ['slug'], errorPath: 'title', message: 'project.slug_unique')]
+#[ApiResource(
+    collectionOperations: ['get' => ['normalization_context' => ['groups' => 'project:list']]],
+    itemOperations: ['get' => ['normalization_context' => ['groups' => 'project:item']]],
+    order: ['updatedAt' => 'DESC', 'createdAt' => 'DESC'],
+    paginationEnabled: false
+)]
+#[ApiFilter(SearchFilter::class, properties: ['categories' => 'exact'])]
 class Project
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['project:list', 'project:item'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
+    #[Groups(['project:list', 'project:item'])]
     private ?string $title = null;
 
     #[ORM\Column(type: 'text')]
     #[Assert\NotBlank]
     #[Assert\Length(min: 10, minMessage: 'project.too_short_content')]
+    #[Groups(['project:item'])]
     private ?string $description = null;
 
     #[ORM\Column(type: 'string', nullable: true)]
     #[Assert\Url]
+    #[Groups(['project:item'])]
     private ?string $url = null;
 
     #[ORM\Column(type: 'string')]
+    #[Groups(['project:list', 'project:item'])]
     private ?string $slug = null;
 
     #[ORM\Column(type: 'datetime_immutable')]
@@ -53,6 +70,7 @@ class Project
      */
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'projects')]
     #[Assert\Count(max: 4, maxMessage: 'project.too_many_categories')]
+    #[Groups(['project:list', 'project:item'])]
     private Collection $categories;
 
     public function __construct()
@@ -113,6 +131,13 @@ class Project
         $this->slug = $slug;
 
         return $this;
+    }
+
+    public function computeSlug(SluggerInterface $slugger): void
+    {
+        if (!$this->slug || '-' === $this->slug) {
+            $this->slug = (string) $slugger->slug((string) $this)->lower();
+        }
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
@@ -188,5 +213,10 @@ class Project
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->title ?? '';
     }
 }

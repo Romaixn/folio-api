@@ -4,28 +4,37 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[ApiResource(
+    collectionOperations: ['get' => ['normalization_context' => ['groups' => 'category:list']]],
+    itemOperations: ['get' => ['normalization_context' => ['groups' => 'category:item']]],
+)]
 class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['category:list', 'category:item'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
+    #[Groups(['category:list', 'category:item'])]
     private ?string $name = null;
 
     /**
      * @var Project[]|Collection
      */
     #[ORM\ManyToMany(targetEntity: Project::class, inversedBy: 'categories')]
+    #[Groups(['category:item'])]
     private Collection $projects;
 
     public function __construct()

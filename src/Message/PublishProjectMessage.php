@@ -6,14 +6,11 @@ namespace App\Message;
 
 final class PublishProjectMessage
 {
-    private $id;
-
-    public function __construct(int $id)
+    public function __construct(private ?int $id = null)
     {
-        $this->id = $id;
     }
 
-    public function getId(): int
+    public function getId(): int|null
     {
         return $this->id;
     }
