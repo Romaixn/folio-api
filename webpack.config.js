@@ -57,6 +57,9 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
+
+    // enables PostCSS support
+    .enablePostCssLoader()
 ;
 
 module.exports = Encore.getWebpackConfig();
