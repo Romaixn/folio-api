@@ -1,0 +1,26 @@
+framework:
+    workflows:
+        project:
+            type: state_machine
+            audit_trail:
+                enabled: "%kernel.debug%"
+            marking_store:
+                type: 'method'
+                property: 'state'
+            supports:
+                - App\Entity\Project
+            initial_marking: draft
+            places:
+                - draft
+                - ready
+                - published
+            transitions:
+                publish:
+                    from: draft
+                    to: ready
+                optimize:
+                    from: ready
+                    to:   published
+                unpublish:
+                    from: published
+                    to: draft

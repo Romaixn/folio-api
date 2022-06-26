@@ -151,7 +151,7 @@ class Project
         return $this;
     }
 
-    public function isIsPublished(): ?bool
+    public function isPublished(): ?bool
     {
         return $this->isPublished;
     }
