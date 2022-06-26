@@ -22,7 +22,6 @@ use Symfony\Component\Validator\Constraints as Assert;
     collectionOperations: ['get' => ['normalization_context' => ['groups' => 'project:list']]],
     itemOperations: ['get' => ['normalization_context' => ['groups' => 'project:item']]],
     order: ['updatedAt' => 'DESC', 'createdAt' => 'DESC'],
-    paginationEnabled: false
 )]
 #[ApiFilter(SearchFilter::class, properties: ['categories' => 'exact'])]
 class Project

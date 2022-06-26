@@ -1,7 +1,27 @@
 api_platform:
+    formats:
+        jsonld: [ 'application/ld+json' ]
+        json: [ 'application/json' ]
+        html: [ 'text/html' ]
+    title: rherault API
+    version: 1.0.0
     mapping:
-        paths: ['%kernel.project_dir%/src/Entity']
+        paths: [ '%kernel.project_dir%/src/Entity']
     patch_formats:
-        json: ['application/merge-patch+json']
+        jsonld: [ 'application/ld+json' ]
+        jsonapi: [ 'application/vnd.api+json' ]
+        json: [ 'application/merge-patch+json' ]
     swagger:
-        versions: [3]
+        versions: [ 3 ]
+    error_formats:
+        jsonproblem: [ 'application/problem+json' ]
+        jsonld: [ 'application/ld+json' ]      # Hydra error formats
+        jsonapi: [ 'application/vnd.api+json' ]
+    eager_loading:
+        fetch_partial: true
+        force_eager: false
+    allow_plain_identifiers: true
+    defaults:
+        stateless: true
+        cache_headers:
+            vary: [ 'Content-Type', 'Authorization', 'Origin' ]

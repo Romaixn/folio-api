@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     collectionOperations: ['get' => ['normalization_context' => ['groups' => 'category:list']]],
     itemOperations: ['get' => ['normalization_context' => ['groups' => 'category:item']]],
+    paginationEnabled: false
 )]
 class Category
 {
