@@ -105,7 +105,6 @@ class AppFixtures extends Fixture
         foreach ($this->getPhrases() as $i => $title) {
             $posts[] = [
                 $title,
-                $this->getRandomText(),
                 $this->getProjectContent(),
                 $this->getRandomUrl(),
                 $this->getRandomCategories(),

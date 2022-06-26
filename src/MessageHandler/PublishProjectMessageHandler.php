@@ -19,7 +19,7 @@ final class PublishProjectMessageHandler implements MessageHandlerInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly ProjectRepository $projectRepository,
         private readonly MessageBusInterface $bus,
-        private readonly WorkflowInterface $workflow,
+        private readonly WorkflowInterface $projectStateMachine,
         private readonly LoggerInterface $logger
     ) {
     }
@@ -32,22 +32,22 @@ final class PublishProjectMessageHandler implements MessageHandlerInterface
             return;
         }
 
-        if ($this->workflow->can($project, 'publish')) {
+        if ($this->projectStateMachine->can($project, 'publish')) {
             if ($project->isPublished()) {
-                $this->workflow->apply($project, 'publish');
+                $this->projectStateMachine->apply($project, 'publish');
                 $this->entityManager->flush();
 
                 $this->bus->dispatch($message);
             }
-        } elseif ($this->workflow->can($project, 'optimize')) {
+        } elseif ($this->projectStateMachine->can($project, 'optimize')) {
             // if ($project->getPhotoFilename()) {
             // $this->imageOptimizer->resize($this->photoDir.'/'.$project->getPhotoFilename());
             // }
-            $this->workflow->apply($project, 'optimize');
+            $this->projectStateMachine->apply($project, 'optimize');
             $this->entityManager->flush();
-        } elseif ($this->workflow->can($project, 'unpublish')) {
+        } elseif ($this->projectStateMachine->can($project, 'unpublish')) {
             if (!$project->isPublished()) {
-                $this->workflow->apply($project, 'unpublish');
+                $this->projectStateMachine->apply($project, 'unpublish');
                 $this->entityManager->flush();
             }
         }
