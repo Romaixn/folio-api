@@ -102,6 +102,7 @@
         }
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^7.1",
         "friendsofphp/php-cs-fixer": "^3.8",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan": "^1.7",

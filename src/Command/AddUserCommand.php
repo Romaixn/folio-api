@@ -140,15 +140,15 @@ class AddUserCommand extends Command
         $stopwatch = new Stopwatch();
         $stopwatch->start('add-user-command');
 
-        /** @var string|null $username */
+        /** @var string $username */
         $username = $input->getArgument('username');
-        /** @var string|null $plainPassword */
+        /** @var string $plainPassword */
         $plainPassword = $input->getArgument('password');
-        /** @var string|null $email */
+        /** @var string $email */
         $email = $input->getArgument('email');
-        /** @var string|null $fullName */
+        /** @var string $fullName */
         $fullName = $input->getArgument('full-name');
-        /** @var bool|null $isAdmin */
+        /** @var bool $isAdmin */
         $isAdmin = $input->getOption('admin');
 
         // make sure to validate the user data is correct
