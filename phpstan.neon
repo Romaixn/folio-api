@@ -19,7 +19,7 @@ parameters:
     paths:
         - config
         - src
-        - tests
+        # - tests
         - public
 
     # https://github.com/phpstan/phpstan-symfony#configuration
