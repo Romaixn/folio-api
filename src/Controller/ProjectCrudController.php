@@ -57,9 +57,8 @@ final class ProjectCrudController extends AbstractCrudController
                 'heading1' => ['tagName' => 'h2'],
             ],
         ]);
+        yield AssociationField::new('categories');
         yield DateField::new('createdAt')->setFormTypeOption('disabled', 'disabled')->hideOnIndex();
         yield DateField::new('updatedAt')->setFormTypeOption('disabled', 'disabled');
-
-        yield AssociationField::new('categories');
     }
 }
