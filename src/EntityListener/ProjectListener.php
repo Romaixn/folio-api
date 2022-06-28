@@ -31,6 +31,7 @@ class ProjectListener
     public function preUpdate(Project $project, LifecycleEventArgs $event): void
     {
         $project->computeSlug($this->slugger);
+        $project->setUpdatedAt(new \DateTimeImmutable());
         $this->bus->dispatch(new PublishProjectMessage($project->getId()));
     }
 }
