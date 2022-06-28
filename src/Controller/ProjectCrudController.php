@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Project;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 final class ProjectCrudController extends AbstractCrudController
 {
@@ -51,7 +51,12 @@ final class ProjectCrudController extends AbstractCrudController
         yield TextField::new('state')->setFormTypeOption('disabled', 'disabled')->hideOnIndex();
         yield TextField::new('title');
         yield SlugField::new('slug')->setTargetFieldName('title');
-        yield TextEditorField::new('description')->hideOnIndex();
+        yield TextEditorField::new('description')->hideOnIndex()->setTrixEditorConfig([
+            'blockAttributes' => [
+                'default' => ['tagName' => 'p'],
+                'heading1' => ['tagName' => 'h2'],
+            ],
+        ]);
         yield DateField::new('createdAt')->setFormTypeOption('disabled', 'disabled')->hideOnIndex();
         yield DateField::new('updatedAt')->setFormTypeOption('disabled', 'disabled');
 
