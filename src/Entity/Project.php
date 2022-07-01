@@ -237,11 +237,11 @@ class Project
 
     public function getPhotoFilenameUrl(): ?string
     {
-        if(!$this->photoFilename) {
+        if (!$this->photoFilename) {
             return null;
         }
 
-        if(strpos($this->photoFilename, '/') !== false) {
+        if (strpos($this->photoFilename, '/') !== false) {
             return $this->photoFilename;
         }
 

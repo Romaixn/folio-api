@@ -7,6 +7,7 @@ namespace App\MessageHandler;
 use App\Entity\Project;
 use App\Message\PublishProjectMessage;
 use App\Repository\ProjectRepository;
+use App\Utils\ImageOptimizer;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -20,7 +21,9 @@ final class PublishProjectMessageHandler implements MessageHandlerInterface
         private readonly ProjectRepository $projectRepository,
         private readonly MessageBusInterface $bus,
         private readonly WorkflowInterface $projectStateMachine,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
+        private readonly ImageOptimizer $imageOptimizer,
+        private readonly string $imageDir
     ) {
     }
 
@@ -40,9 +43,10 @@ final class PublishProjectMessageHandler implements MessageHandlerInterface
                 $this->bus->dispatch($message);
             }
         } elseif ($this->projectStateMachine->can($project, 'optimize')) {
-            // if ($project->getPhotoFilename()) {
-            // $this->imageOptimizer->resize($this->photoDir.'/'.$project->getPhotoFilename());
-            // }
+            if ($project->getPhotoFilename()) {
+                $this->imageOptimizer->resize($this->imageDir.'/'.$project->getPhotoFilename());
+            }
+
             $this->projectStateMachine->apply($project, 'optimize');
             $this->entityManager->flush();
         } elseif ($this->projectStateMachine->can($project, 'unpublish')) {
