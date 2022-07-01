@@ -72,6 +72,10 @@ class Project
     #[Groups(['project:list', 'project:item'])]
     private Collection $categories;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['project:list', 'project:item'])]
+    private ?string $photoFilename = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -217,5 +221,30 @@ class Project
     public function __toString(): string
     {
         return $this->title ?? '';
+    }
+
+    public function getPhotoFilename(): ?string
+    {
+        return $this->photoFilename;
+    }
+
+    public function setPhotoFilename(?string $photoFilename): self
+    {
+        $this->photoFilename = $photoFilename;
+
+        return $this;
+    }
+
+    public function getPhotoFilenameUrl(): ?string
+    {
+        if(!$this->photoFilename) {
+            return null;
+        }
+
+        if(strpos($this->photoFilename, '/') !== false) {
+            return $this->photoFilename;
+        }
+
+        return sprintf('/uploads/images/%s', $this->photoFilename);
     }
 }

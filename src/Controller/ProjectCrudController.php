@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -48,7 +49,7 @@ final class ProjectCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield BooleanField::new('isPublished')->renderAsSwitch();
-        yield TextField::new('state')->setFormTypeOption('disabled', 'disabled')->hideOnIndex();
+        yield TextField::new('state')->setFormTypeOption('disabled', true)->hideOnIndex();
         yield TextField::new('title');
         yield SlugField::new('slug')->setTargetFieldName('title');
         yield TextEditorField::new('description')->hideOnIndex()->setTrixEditorConfig([
@@ -57,8 +58,14 @@ final class ProjectCrudController extends AbstractCrudController
                 'heading1' => ['tagName' => 'h2'],
             ],
         ]);
-        yield AssociationField::new('categories');
-        yield DateField::new('createdAt')->setFormTypeOption('disabled', 'disabled')->hideOnIndex();
-        yield DateField::new('updatedAt')->setFormTypeOption('disabled', 'disabled');
+        yield ImageField::new('photoFilename')
+            ->setBasePath('uploads/images')
+            ->setUploadDir('public/uploads/images')
+            ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]')
+            ->setLabel('Image')
+        ;
+        yield AssociationField::new('categories')->setFormTypeOption('by_reference', false);
+        yield DateField::new('createdAt')->setFormTypeOption('disabled', true)->hideOnIndex();
+        yield DateField::new('updatedAt')->setFormTypeOption('disabled', true);
     }
 }
