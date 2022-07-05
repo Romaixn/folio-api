@@ -12,15 +12,15 @@ framework:
             initial_marking: draft
             places:
                 - draft
-                - ready
+                # - ready
                 - published
             transitions:
                 publish:
                     from: draft
-                    to: ready
-                optimize:
-                    from: ready
-                    to:   published
+                    to: published
+                # optimize:
+                #     from: ready
+                #     to:   published
                 unpublish:
                     from: published
                     to: draft
