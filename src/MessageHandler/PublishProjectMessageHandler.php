@@ -43,9 +43,9 @@ final class PublishProjectMessageHandler implements MessageHandlerInterface
                 $this->bus->dispatch($message);
             }
         } elseif ($this->projectStateMachine->can($project, 'optimize')) {
-            if ($project->getPhotoFilename()) {
-                $this->imageOptimizer->resize($this->imageDir.'/'.$project->getPhotoFilename());
-            }
+            // if ($project->getPhotoFilename()) {
+                // $this->imageOptimizer->resize($this->imageDir.'/'.$project->getPhotoFilename());
+            // }
 
             $this->projectStateMachine->apply($project, 'optimize');
             $this->entityManager->flush();

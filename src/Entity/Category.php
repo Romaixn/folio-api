@@ -28,7 +28,7 @@ class Category
 
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
-    #[Groups(['category:list', 'category:item'])]
+    #[Groups(['category:list', 'category:item', 'project:list', 'project:item'])]
     private ?string $name = null;
 
     /**
