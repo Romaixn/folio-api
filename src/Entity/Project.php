@@ -40,6 +40,12 @@ class Project
     #[ORM\Column(type: 'text')]
     #[Assert\NotBlank]
     #[Assert\Length(min: 10, minMessage: 'project.too_short_content')]
+    #[Groups(['project:list'])]
+    private ?string $excerpt = null;
+
+    #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 10, minMessage: 'project.too_short_content')]
     #[Groups(['project:item'])]
     private ?string $description = null;
 
@@ -246,5 +252,17 @@ class Project
         }
 
         return sprintf('/uploads/images/%s', $this->photoFilename);
+    }
+
+    public function getExcerpt(): ?string
+    {
+        return $this->excerpt;
+    }
+
+    public function setExcerpt(string $excerpt): self
+    {
+        $this->excerpt = $excerpt;
+
+        return $this;
     }
 }

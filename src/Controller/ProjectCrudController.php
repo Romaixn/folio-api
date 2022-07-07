@@ -15,6 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -52,6 +53,7 @@ final class ProjectCrudController extends AbstractCrudController
         yield TextField::new('state')->setFormTypeOption('disabled', true)->hideOnIndex();
         yield TextField::new('title');
         yield SlugField::new('slug')->setTargetFieldName('title');
+        yield TextareaField::new('excerpt')->hideOnIndex();
         yield TextEditorField::new('description')->hideOnIndex()->setTrixEditorConfig([
             'blockAttributes' => [
                 'default' => ['tagName' => 'p'],
