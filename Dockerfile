@@ -43,6 +43,7 @@ RUN set -eux; \
 		libwebp-dev \
 		zlib-dev \
 		libxpm-dev \
+		libxslt-dev \
 	; \
 	\
 	docker-php-ext-configure zip; \
@@ -50,6 +51,7 @@ RUN set -eux; \
 		intl \
 		zip \
 		gd \
+		xsl \
 	; \
 	pecl install \
 		apcu-${APCU_VERSION} \

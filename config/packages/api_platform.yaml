@@ -13,6 +13,11 @@ api_platform:
         json: [ 'application/merge-patch+json' ]
     swagger:
         versions: [ 3 ]
+    openapi:
+        contact:
+            name: Romain Herault
+            url: https://rherault.fr
+            email: romain@rherault.fr
     error_formats:
         jsonproblem: [ 'application/problem+json' ]
         jsonld: [ 'application/ld+json' ]      # Hydra error formats
@@ -22,6 +27,6 @@ api_platform:
         force_eager: false
     allow_plain_identifiers: true
     defaults:
-        stateless: true
+        stateless: false
         cache_headers:
             vary: [ 'Content-Type', 'Authorization', 'Origin' ]

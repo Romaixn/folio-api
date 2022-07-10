@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    default_admin_email: 'romain@rherault.fr'
 
 services:
     # default configuration for services in *this* file
@@ -12,6 +13,7 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             string $imageDir: "%kernel.project_dir%/public/uploads/images"
+            string $adminEmail: "%env(string:default:default_admin_email:ADMIN_EMAIL)%"
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -27,6 +29,12 @@ services:
             - { name: 'doctrine.orm.entity_listener', event: 'prePersist', entity: 'App\Entity\Project'}
             - { name: 'doctrine.orm.entity_listener', event: 'postPersist', entity: 'App\Entity\Project'}
             - { name: 'doctrine.orm.entity_listener', event: 'preUpdate', entity: 'App\Entity\Project'}
+
+
+    App\OpenApi\OpenApiFactory:
+        decorates: 'api_platform.openapi.factory'
+        arguments: ['@App\OpenApi\OpenApiFactory.inner']
+        autoconfigure: false
 
 when@test:
     services:
