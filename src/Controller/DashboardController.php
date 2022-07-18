@@ -26,13 +26,19 @@ final class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('API')
+            ->setTitle('<img style="height:2rem" src="build/images/logo-typo.svg">')
         ;
     }
 
     public function configureMenuItems(): iterable
     {
+        yield MenuItem::linkToUrl('Go to website', 'fas fa-home', 'https://rherault.fr');
+        yield MenuItem::linkToUrl('Go to API docs', 'fas fa-book', '/api/docs');
+
+        yield MenuItem::section('Projects');
         yield MenuItem::linkToCrud('Project', 'fas fa-list', Project::class);
         yield MenuItem::linkToCrud('Category', 'fas fa-tag', Category::class);
+
+        yield MenuItem::section('Newsletter');
     }
 }
