@@ -7,24 +7,49 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
-    collectionOperations: ['post'],
+    collectionOperations: ['post' => [
+        'path' => 'contact',
+    ]],
     itemOperations: ['get' => [
         'openapi_context' => [
             'summary' => 'hidden',
-        ]
+        ],
     ]],
 )]
 class Contact
 {
     #[ApiProperty(identifier: true)]
     private ?string $id = null;
+
+    #[Assert\NotBlank]
     private string $firstName;
+
+    #[Assert\NotBlank]
     private string $lastName;
+
+    #[Assert\NotBlank]
+    #[Assert\Email]
     private string $email;
+
+    #[Assert\Length(
+        min: 10,
+        max: 12,
+        minMessage: "Your phone number must be at least {{ limit }} characters long",
+        maxMessage: "Your phone number cannot be longer than {{ limit }} characters"
+    )]
     private ?string $phone = null;
+
+    #[Assert\NotBlank]
     private string $subject;
+
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        max: 500,
+        maxMessage: 'Your message is too long ({{ limit }} characters max).',
+    )]
     private string $message;
 
     public function __construct()
