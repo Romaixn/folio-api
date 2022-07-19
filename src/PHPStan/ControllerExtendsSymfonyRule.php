@@ -10,6 +10,7 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 use function Symfony\Component\String\u;
 
 /**

@@ -57,10 +57,11 @@ class AppFixtures extends Fixture
 
     private function loadProjects(ObjectManager $manager): void
     {
-        foreach ($this->getProjectData() as [$title, $description, $url, $categories]) {
+        foreach ($this->getProjectData() as [$title, $description, $excerpt, $url, $categories]) {
             $project = new Project();
             $project->setTitle($title);
             $project->setDescription($description);
+            $project->setExcerpt($excerpt);
             $project->setUrl($url);
             $project->addCategory(...$categories);
             $project->setIsPublished((bool) mt_rand(0, 1));
@@ -106,6 +107,7 @@ class AppFixtures extends Fixture
             $posts[] = [
                 $title,
                 $this->getProjectContent(),
+                $title,
                 $this->getRandomUrl(),
                 $this->getRandomCategories(),
             ];

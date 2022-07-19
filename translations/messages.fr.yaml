@@ -1,5 +1,6 @@
 Go to website: Aller sur le site
 Go to API docs: API documentation
+Healthcheck: Status
 
 Project: Projet
 Dashboard: Tableau de bord
@@ -18,3 +19,13 @@ Description: Description
 Created At: Créé le
 Image: Image
 Excerpt: Extrait
+
+Newsletter: Newsletter
+Article category: Catégorie
+Subscribers: Abonnés
+Content: Contenu
+Url: URL
+Articles: Articles
+
+Subscriber: Abonné
+Email: Email

@@ -10,6 +10,7 @@ use PhpParser\Node\Name\FullyQualified;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use Symfony\Component\HttpFoundation\Response;
+
 use function Symfony\Component\String\u;
 
 /**

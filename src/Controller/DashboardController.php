@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Group;
+use App\Entity\Newsletter;
 use App\Entity\Project;
+use App\Entity\Subscriber;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -33,6 +36,7 @@ final class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToUrl('Go to website', 'fas fa-home', 'https://rherault.fr');
+        yield MenuItem::linkToUrl('Healthcheck', 'fas fa-heartbeat', 'https://status.rherault.fr');
         yield MenuItem::linkToUrl('Go to API docs', 'fas fa-book', '/api/docs');
 
         yield MenuItem::section('Projects');
@@ -40,5 +44,8 @@ final class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Category', 'fas fa-tag', Category::class);
 
         yield MenuItem::section('Newsletter');
+        yield MenuItem::linkToCrud('Newsletter', 'fas fa-newspaper', Newsletter::class);
+        yield MenuItem::linkToCrud('Article category', 'fas fa-tag', Group::class);
+        yield MenuItem::linkToCrud('Subscribers', 'fas fa-user-friends', Subscriber::class);
     }
 }
