@@ -5,6 +5,8 @@ Healthcheck: Status
 Project: Projet
 Dashboard: Tableau de bord
 Category: Catégorie
+Project Category: Catégorie
+Project Categories: Catégories
 Is Published: Publié ?
 Title: Titre
 Slug: Slug
@@ -29,3 +31,5 @@ Articles: Articles
 
 Subscriber: Abonné
 Email: Email
+
+Is Verified: Vérifié ?
