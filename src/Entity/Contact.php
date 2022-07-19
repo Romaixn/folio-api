@@ -34,12 +34,6 @@ class Contact
     #[Assert\Email]
     private string $email;
 
-    #[Assert\Length(
-        min: 10,
-        max: 12,
-        minMessage: 'Your phone number must be at least {{ limit }} characters long',
-        maxMessage: 'Your phone number cannot be longer than {{ limit }} characters'
-    )]
     private ?string $phone = null;
 
     #[Assert\NotBlank]
