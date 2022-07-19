@@ -6,9 +6,10 @@ namespace App\Service;
 
 use App\Entity\Contact;
 use App\Entity\Subscriber;
+use Symfony\Component\Mime\Address;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 class SendMail
 {
@@ -19,8 +20,8 @@ class SendMail
     public function confirmation(Subscriber $subscriber): void
     {
         $this->mailer->send((new TemplatedEmail())
-            ->from($this->adminEmail)
-            ->to($subscriber->getEmail())
+            ->from(new Address($this->adminEmail, 'Romain Herault'))
+            ->to(new Address((string) $subscriber->getEmail()))
             ->subject('Confirmation de votre inscription - Romain Herault Newsletter')
             ->htmlTemplate('emails/confirmation.html.twig')
             ->context([
