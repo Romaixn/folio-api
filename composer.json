@@ -3,13 +3,13 @@
     "type": "project",
     "license": "MIT",
     "description": "A minimal Symfony project recommended to create bare bones applications",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
         "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "api-platform/core": "^2.6",
+        "api-platform/core": "^3.0-rc.1",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
@@ -54,7 +54,8 @@
         "twig/cssinliner-extra": "^3.4",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/inky-extra": "^3.4",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "webmozart/assert": "^1.11"
     },
     "config": {
         "allow-plugins": {

@@ -7,8 +7,8 @@ includes:
     #- vendor/phpstan/phpstan/phpstan-doctrine             # https://github.com/phpstan/phpstan-doctrine            ✅
 
 rules:
-    - App\PHPStan\ControllerIsFinalRule
-    - App\PHPStan\ControllerExtendsSymfonyRule
+    #- App\PHPStan\ControllerIsFinalRule
+    #- App\PHPStan\ControllerExtendsSymfonyRule
     #- App\PHPStan\NoNewinControllerRule
 
 parameters:
