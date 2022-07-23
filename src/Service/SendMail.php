@@ -6,10 +6,10 @@ namespace App\Service;
 
 use App\Entity\Contact;
 use App\Entity\Subscriber;
-use Symfony\Component\Mime\Address;
+use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Bridge\Twig\Mime\NotificationEmail;
+use Symfony\Component\Mime\Address;
 
 class SendMail
 {

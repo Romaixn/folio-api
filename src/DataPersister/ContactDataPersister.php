@@ -24,13 +24,13 @@ class ContactDataPersister implements ContextAwareDataPersisterInterface
      * @param Contact      $data
      * @param array<mixed> $context
      */
-    public function persist($data, array $context = [])
+    public function persist($data, array $context = []): void
     {
         $this->sendMail->send($data);
     }
 
     /** @phpstan-ignore-next-line */
-    public function remove($data, array $context = [])
+    public function remove($data, array $context = []): void
     {
         // remove $data
     }
