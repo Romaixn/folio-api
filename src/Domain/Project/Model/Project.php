@@ -6,17 +6,17 @@ namespace App\Domain\Project\Model;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\Uuid;
 use Webmozart\Assert\Assert;
 
 #[ORM\Entity]
 class Project
 {
-    public function __construct(
-        #[ORM\Id]
-        #[ORM\GeneratedValue]
-        #[ORM\Column()]
-        public readonly int $id,
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid')]
+    public readonly Uuid $id;
 
+    public function __construct(
         #[ORM\Column]
         public string $title,
 
@@ -47,6 +47,8 @@ class Project
         #[ORM\Column]
         public ?string $photoFilename = null,
     ) {
+        $this->id = Uuid::v4();
+
         Assert::lengthBetween($title, 1, 255);
         Assert::lengthBetween($excerpt, 1, 255);
         Assert::minLength($description, 100);
