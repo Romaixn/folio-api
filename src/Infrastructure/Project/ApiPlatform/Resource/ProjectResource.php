@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\GetCollection;
 use App\Domain\Project\Model\Project;
 use App\Infrastructure\Project\ApiPlatform\OpenApi\CategoryFilter;
 use App\Infrastructure\Project\ApiPlatform\State\Provider\ProjectCrudProvider;
+use Symfony\Component\Uid\Uuid;
 
 #[ApiResource(
     shortName: 'Project',
@@ -22,7 +23,8 @@ use App\Infrastructure\Project\ApiPlatform\State\Provider\ProjectCrudProvider;
 final class ProjectResource
 {
     public function __construct(
-        public ?int $id = null,
+        #[ApiProperty(writable: false)]
+        public ?Uuid $id = null,
 
         public ?string $title = null,
 
@@ -45,6 +47,7 @@ final class ProjectResource
 
         public ?string $photoFilename = null,
     ) {
+        $this->id = $id ?? Uuid::v4();
     }
 
     public static function fromModel(Project $project): static
