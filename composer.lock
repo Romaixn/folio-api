@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa137c9a19da2a0ece6a423c1812b36e",
+    "content-hash": "203a6cab5c729fae426a45ed34d4819e",
     "packages": [
         {
             "name": "api-platform/core",
-            "version": "v3.0.0-rc.1",
+            "version": "v3.0.0-rc.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/core.git",
-                "reference": "e7417cb8152fa35e850dfbdb4df3018fb4c6bd8d"
+                "reference": "71a141711da88e149aeb15fe0b9ca61a661dfb4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/core/zipball/e7417cb8152fa35e850dfbdb4df3018fb4c6bd8d",
-                "reference": "e7417cb8152fa35e850dfbdb4df3018fb4c6bd8d",
+                "url": "https://api.github.com/repos/api-platform/core/zipball/71a141711da88e149aeb15fe0b9ca61a661dfb4c",
+                "reference": "71a141711da88e149aeb15fe0b9ca61a661dfb4c",
                 "shasum": ""
             },
             "require": {
@@ -160,7 +160,7 @@
             ],
             "support": {
                 "issues": "https://github.com/api-platform/core/issues",
-                "source": "https://github.com/api-platform/core/tree/v3.0.0-rc.1"
+                "source": "https://github.com/api-platform/core/tree/v3.0.0-rc.2"
             },
             "funding": [
                 {
@@ -168,7 +168,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-18T15:34:01+00:00"
+            "time": "2022-07-25T10:10:02+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -2022,16 +2022,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "3.1.0",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "0c375495d40df0207e5833dca333f963b171ff43"
+                "reference": "305444bc6fb6c89e490f4b34fa6e979584d7fa81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/0c375495d40df0207e5833dca333f963b171ff43",
-                "reference": "0c375495d40df0207e5833dca333f963b171ff43",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/305444bc6fb6c89e490f4b34fa6e979584d7fa81",
+                "reference": "305444bc6fb6c89e490f4b34fa6e979584d7fa81",
                 "shasum": ""
             },
             "require": {
@@ -2051,7 +2051,6 @@
                 "guzzlehttp/psr7": "^2.2",
                 "mongodb/mongodb": "^1.8",
                 "php-amqplib/php-amqplib": "~2.4 || ^3",
-                "php-console/php-console": "^3.1.3",
                 "phpstan/phpstan": "^1.4",
                 "phpstan/phpstan-deprecation-rules": "^1.0",
                 "phpstan/phpstan-strict-rules": "^1.1",
@@ -2074,7 +2073,6 @@
                 "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
                 "mongodb/mongodb": "Allow sending log messages to a MongoDB server (via library)",
                 "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
-                "php-console/php-console": "Allow sending log messages to Google Chrome",
                 "rollbar/rollbar": "Allow sending log messages to Rollbar",
                 "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
             },
@@ -2109,7 +2107,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/3.1.0"
+                "source": "https://github.com/Seldaek/monolog/tree/3.2.0"
             },
             "funding": [
                 {
@@ -2121,7 +2119,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-09T09:09:00+00:00"
+            "time": "2022-07-24T12:00:55+00:00"
         },
         {
             "name": "nelmio/cors-bundle",

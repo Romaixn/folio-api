@@ -9,6 +9,7 @@ use App\Domain\Project\Repository\ProjectRepositoryInterface;
 use App\Infrastructure\Shared\Doctrine\DoctrineRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\Uid\Uuid;
 
 final class DoctrineProjectRepository extends DoctrineRepository implements ProjectRepositoryInterface
 {
@@ -30,6 +31,11 @@ final class DoctrineProjectRepository extends DoctrineRepository implements Proj
     {
         $this->em->remove($project);
         $this->em->flush();
+    }
+
+    public function ofId(Uuid $id): ?Project
+    {
+        return $this->em->find(self::ENTITY_CLASS, $id);
     }
 
     public function ofSlug(string $slug): ?Project

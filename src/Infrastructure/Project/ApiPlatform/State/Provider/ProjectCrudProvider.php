@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Project\ApiPlatform\State\Provider;
 
-use ApiPlatform\Metadata\Operation;
-use App\Domain\Project\Model\Project;
-use ApiPlatform\State\ProviderInterface;
-use ApiPlatform\State\Pagination\Pagination;
-use App\Application\Project\Query\FindProjectQuery;
-use App\Application\Shared\Query\QueryBusInterface;
-use App\Application\Project\Query\FindProjectsQuery;
 use ApiPlatform\Metadata\CollectionOperationInterface;
-use App\Infrastructure\Shared\ApiPlatform\State\Paginator;
+use ApiPlatform\Metadata\Operation;
+use ApiPlatform\State\Pagination\Pagination;
+use ApiPlatform\State\ProviderInterface;
+use App\Application\Project\Query\FindProjectQuery;
+use App\Application\Project\Query\FindProjectsQuery;
+use App\Application\Shared\Query\QueryBusInterface;
+use App\Domain\Project\Model\Project;
 use App\Domain\Project\Repository\ProjectRepositoryInterface;
 use App\Infrastructure\Project\ApiPlatform\Resource\ProjectResource;
+use App\Infrastructure\Shared\ApiPlatform\State\Paginator;
 
 final class ProjectCrudProvider implements ProviderInterface
 {
