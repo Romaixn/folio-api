@@ -7,7 +7,9 @@ use Webmozart\Assert\InvalidArgumentException;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->extension('api_platform', [
-        'metadata_backward_compatibility_layer' => false,
+        'title' => 'rherault API',
+        'version' => '2.0.0',
+        'show_webby' => false,
         'mapping' => [
             'paths' => [
                 '%kernel.project_dir%/src/Infrastructure/Project/ApiPlatform/Resource/',
