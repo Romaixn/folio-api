@@ -10,16 +10,19 @@ use Webmozart\Assert\Assert;
 
 final class UpdateProjectCommand implements CommandInterface
 {
+    public \DateTimeImmutable $updatedAt;
+
     public function __construct(
         public readonly Uuid $id,
         public readonly ?string $title = null,
         public readonly ?string $excerpt = null,
         public readonly ?string $description = null,
-        public readonly string $slug,
-        public readonly bool $isPublished,
-        public readonly ?string $url,
-        public readonly ?string $photoFilename
+        public readonly bool $isPublished = false,
+        public readonly ?string $url = null,
+        public readonly ?string $photoFilename = null
     ) {
+        $this->updatedAt = new \DateTimeImmutable();
+
         Assert::nullOrLengthBetween($title, 1, 255);
         Assert::nullOrLengthBetween($excerpt, 1, 255);
         Assert::nullOrMinLength($description, 100);

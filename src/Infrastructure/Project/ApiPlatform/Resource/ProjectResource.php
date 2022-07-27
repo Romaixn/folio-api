@@ -4,26 +4,34 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Project\ApiPlatform\Resource;
 
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Patch;
+use Symfony\Component\Uid\Uuid;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\GetCollection;
 use App\Domain\Project\Model\Project;
+use ApiPlatform\Metadata\GetCollection;
 use App\Infrastructure\Project\ApiPlatform\OpenApi\CategoryFilter;
 use App\Infrastructure\Project\ApiPlatform\State\Provider\ProjectCrudProvider;
-use Symfony\Component\Uid\Uuid;
+use App\Infrastructure\Project\ApiPlatform\State\Processor\ProjectCrudProcessor;
 
 #[ApiResource(
     shortName: 'Project',
     operations: [
         new GetCollection(filters: [CategoryFilter::class], provider: ProjectCrudProvider::class),
         new Get(provider: ProjectCrudProvider::class),
+        new Post(validationContext: ['groups' => ['create']], processor: ProjectCrudProcessor::class),
+        new Put(processor: ProjectCrudProcessor::class),
+        new Patch(processor: ProjectCrudProcessor::class),
+        new Delete(processor: ProjectCrudProcessor::class),
     ],
 )]
 final class ProjectResource
 {
     public function __construct(
-        #[ApiProperty(writable: false)]
         public ?Uuid $id = null,
 
         public ?string $title = null,

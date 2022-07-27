@@ -7,9 +7,9 @@ namespace App\Application\Project\Command;
 use App\Application\Shared\Command\CommandHandlerInterface;
 use App\Domain\Project\Repository\ProjectRepositoryInterface;
 
-final class DeleteBookCommandHandler implements CommandHandlerInterface
+final class DeleteProjectCommandHandler implements CommandHandlerInterface
 {
-    public function __construct(private ProjectRepositoryInterface $projectRepository)
+    public function __construct(private readonly ProjectRepositoryInterface $projectRepository)
     {
     }
 

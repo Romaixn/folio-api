@@ -16,7 +16,7 @@ final class CreateProjectCommandHandler implements CommandHandlerInterface
 
     public function __invoke(CreateProjectCommand $command): Project
     {
-        $project = new Project($command->title, $command->excerpt, $command->description, $command->slug, $command->createdAt, $command->updatedAt, $command->state, $command->isPublished, $command->url, $command->photoFilename);
+        $project = new Project($command->title, $command->excerpt, $command->description, $command->isPublished, $command->url, $command->photoFilename);
 
         $this->projectRepository->add($project);
 
