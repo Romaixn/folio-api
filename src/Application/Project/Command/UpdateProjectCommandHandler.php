@@ -10,7 +10,7 @@ use App\Domain\Project\Repository\ProjectRepositoryInterface;
 
 final class UpdateProjectCommandHandler implements CommandHandlerInterface
 {
-    public function __construct(private ProjectRepositoryInterface $projectRepository)
+    public function __construct(private readonly ProjectRepositoryInterface $projectRepository)
     {
     }
 
@@ -25,6 +25,8 @@ final class UpdateProjectCommandHandler implements CommandHandlerInterface
         $project->isPublished = $command->isPublished ?? $project->isPublished;
         $project->url = $command->url ?? $project->url;
         $project->photoFilename = $command->photoFilename ?? $project->photoFilename;
+        $project->createdAt = $command->createdAt ?? $project->createdAt;
+        $project->updatedAt = $command->updatedAt ?? $project->updatedAt;
 
         $this->projectRepository->remove($project);
         $this->projectRepository->add($project);

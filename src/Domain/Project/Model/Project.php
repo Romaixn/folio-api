@@ -16,6 +16,18 @@ class Project
     #[ORM\Column(type: 'uuid')]
     public readonly Uuid $id;
 
+    #[ORM\Column]
+    public string $slug;
+
+    #[ORM\Column]
+    public \DateTimeImmutable $createdAt;
+
+    #[ORM\Column]
+    public ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\Column]
+    public string $state = 'draft';
+
     public function __construct(
         #[ORM\Column]
         public string $title,
@@ -27,18 +39,6 @@ class Project
         public string $description,
 
         #[ORM\Column]
-        public string $slug,
-
-        #[ORM\Column]
-        public \DateTimeImmutable $createdAt,
-
-        #[ORM\Column]
-        public \DateTimeImmutable $updatedAt,
-
-        #[ORM\Column]
-        public string $state = 'draft',
-
-        #[ORM\Column]
         public bool $isPublished = false,
 
         #[ORM\Column]
@@ -48,11 +48,11 @@ class Project
         public ?string $photoFilename = null,
     ) {
         $this->id = Uuid::v4();
+        $this->createdAt = new \DateTimeImmutable();
 
         Assert::lengthBetween($title, 1, 255);
         Assert::lengthBetween($excerpt, 1, 255);
         Assert::minLength($description, 100);
         Assert::nullOrStartsWith($url, 'https://');
-        Assert::inArray($state, ['draft', 'published']);
     }
 }
