@@ -10,6 +10,7 @@ use Webmozart\Assert\Assert;
 final class CreateProjectCommand implements CommandInterface
 {
     public \DateTimeImmutable $createdAt;
+    public ?string $slug = null;
 
     public function __construct(
         public readonly string $title,

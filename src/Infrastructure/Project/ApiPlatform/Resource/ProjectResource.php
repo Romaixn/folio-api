@@ -17,6 +17,7 @@ use ApiPlatform\Metadata\GetCollection;
 use App\Infrastructure\Project\ApiPlatform\OpenApi\CategoryFilter;
 use App\Infrastructure\Project\ApiPlatform\State\Provider\ProjectCrudProvider;
 use App\Infrastructure\Project\ApiPlatform\State\Processor\ProjectCrudProcessor;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     shortName: 'Project',
@@ -24,7 +25,6 @@ use App\Infrastructure\Project\ApiPlatform\State\Processor\ProjectCrudProcessor;
         new GetCollection(filters: [CategoryFilter::class], provider: ProjectCrudProvider::class),
         new Get(provider: ProjectCrudProvider::class),
         new Post(validationContext: ['groups' => ['create']], processor: ProjectCrudProcessor::class),
-        new Put(processor: ProjectCrudProcessor::class),
         new Patch(processor: ProjectCrudProcessor::class),
         new Delete(processor: ProjectCrudProcessor::class),
     ],
@@ -34,10 +34,13 @@ final class ProjectResource
     public function __construct(
         public ?Uuid $id = null,
 
+        #[Assert\NotNull(groups: ['create'])]
         public ?string $title = null,
 
+        #[Assert\NotNull(groups: ['create'])]
         public ?string $excerpt = null,
 
+        #[Assert\NotNull(groups: ['create'])]
         public ?string $description = null,
 
         #[ApiProperty(identifier: true, writable: false)]
@@ -49,6 +52,7 @@ final class ProjectResource
 
         public ?string $state = null,
 
+        #[Assert\NotNull(groups: ['create'])]
         public ?bool $isPublished = false,
 
         public ?string $url = null,
