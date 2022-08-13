@@ -17,12 +17,9 @@ class Project
     public readonly Uuid $id;
 
     #[ORM\Column]
-    public string $slug;
-
-    #[ORM\Column]
     public \DateTimeImmutable $createdAt;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     public ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column]
@@ -39,12 +36,15 @@ class Project
         public string $description,
 
         #[ORM\Column]
+        public string $slug,
+
+        #[ORM\Column]
         public bool $isPublished = false,
 
-        #[ORM\Column]
+        #[ORM\Column(nullable: true)]
         public ?string $url = null,
 
-        #[ORM\Column]
+        #[ORM\Column(nullable: true)]
         public ?string $photoFilename = null,
     ) {
         $this->id = Uuid::v4();
@@ -53,6 +53,6 @@ class Project
         Assert::lengthBetween($title, 1, 255);
         Assert::lengthBetween($excerpt, 1, 255);
         Assert::minLength($description, 100);
-        Assert::nullOrStartsWith($url, 'https://');
+        Assert::nullOrStartsWith($url, 'http');
     }
 }

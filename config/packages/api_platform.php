@@ -10,23 +10,45 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'title' => 'rherault API',
         'version' => '2.0.0',
         'show_webby' => false,
+        'openapi' => [
+            'contact' => [
+                'name' =>  'Romain Herault',
+                'url' => 'https://rherault.fr',
+                'email' => 'romain@rherault.fr'
+            ]
+        ],
         'mapping' => [
             'paths' => [
                 '%kernel.project_dir%/src/Infrastructure/Project/ApiPlatform/Resource/',
             ],
         ],
+        'formats' => [
+            'jsonld' => [ 'application/ld+json' ],
+            'json' => [ 'application/json' ],
+            'html' => [ 'text/html' ]
+        ],
         'patch_formats' => [
+            'jsonld' => [ 'application/ld+json' ],
+            'jsonapi' => [ 'application/vnd.api+json' ],
             'json' => ['application/merge-patch+json'],
         ],
         'swagger' => [
             'versions' => [3],
         ],
-        'exception_to_status' => [
-            // TODO
-            // We must trigger the API Platform validator before the data transforming.
-            // Let's create an API Platform PR to update the AbstractItemNormalizer.
-            // In that way, this exception won't be raised anymore as payload will be validated (see DiscountBookPayload).
-            InvalidArgumentException::class => 422,
+        'error_formats' => [
+            'jsonproblem' => [ 'application/problem+json' ],
+            'jsonld' => [ 'application/ld+json' ],
+            'jsonapi' => [ 'application/vnd.api+json' ]
         ],
+        'eager_loading' => [
+            'fetch_partial' => true,
+            'force_eager' => false
+        ],
+        'defaults' => [
+            'stateless' => false,
+            'cache_headers' => [
+                'vary' => [ 'Content-Type', 'Authorization', 'Origin' ]
+            ]
+        ]
     ]);
 };
