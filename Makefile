@@ -55,7 +55,6 @@ cc: sf
 ## —— PHPUnit 🧪 ———————————————————————————————————————————————————————————————
 test: export APP_ENV=test
 test: ## Run PHPUnit tests
-	@$(SYMFONY) doctrine:database:drop --force --env=test || true
 	@$(SYMFONY) doctrine:database:create --env=test
 	@$(SYMFONY) doctrine:migrations:migrate -n --env=test
 	@$(PHP) bin/phpunit
