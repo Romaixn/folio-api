@@ -11,9 +11,6 @@ use App\Domain\Project\Model\Project;
 use ApiPlatform\State\ProcessorInterface;
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use App\Application\Shared\Command\CommandBusInterface;
-use App\Application\BookStore\Command\CreateBookCommand;
-use App\Application\BookStore\Command\DeleteBookCommand;
-use App\Application\BookStore\Command\UpdateBookCommand;
 use App\Application\Project\Command\CreateProjectCommand;
 use App\Application\Project\Command\DeleteProjectCommand;
 use App\Application\Project\Command\UpdateProjectCommand;
@@ -38,7 +35,7 @@ final class ProjectCrudProcessor implements ProcessorInterface
 
         $command = !isset($uriVariables['id'])
             ? new CreateProjectCommand($data->title, $data->excerpt, $data->description, $data->isPublished, $data->url, $data->photoFilename)
-            : new UpdateProjectCommand(Uuid::fromString($uriVariables['id']), $data->name, $data->description, $data->author, $data->content, $data->price)
+            : new UpdateProjectCommand(Uuid::fromString($uriVariables['id']), $data->title, $data->excerpt, $data->description, $data->isPublished, $data->url, $data->photoFilename)
         ;
 
         /** @var Project $model */
