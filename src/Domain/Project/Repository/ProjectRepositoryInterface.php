@@ -20,6 +20,4 @@ interface ProjectRepositoryInterface extends RepositoryInterface
     public function ofId(Uuid $id): ?Project;
 
     public function ofSlug(string $slug): ?Project;
-
-    public function withCategory(string $category): static;
 }

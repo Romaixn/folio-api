@@ -13,7 +13,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->extension('framework', [
         'profiler' => [
             'only_exceptions' => false,
-            'collect_serializer_data' => true
+            'collect_serializer_data' => true,
         ],
     ]);
 };

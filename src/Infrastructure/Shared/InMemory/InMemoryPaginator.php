@@ -13,10 +13,10 @@ final class InMemoryPaginator implements PaginatorInterface
     private int $lastPage;
 
     public function __construct(
-        private iterable $items,
-        private int $totalItems,
-        private int $currentPage,
-        private int $itemsPerPage,
+        private readonly iterable $items,
+        private readonly int $totalItems,
+        private readonly int $currentPage,
+        private readonly int $itemsPerPage,
     ) {
         $this->offset = ($currentPage - 1) * $itemsPerPage;
         $this->limit = $this->offset + $itemsPerPage;

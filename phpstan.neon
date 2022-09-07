@@ -13,7 +13,7 @@ rules:
 
 parameters:
     # https://phpstan.org/config-reference#rule-level
-    level: max # Max is level 9 as of PHPStan 1.0
+    level: 5 # Max is level 9 as of PHPStan 1.0
 
     # https://phpstan.org/config-reference#analysed-files
     paths:

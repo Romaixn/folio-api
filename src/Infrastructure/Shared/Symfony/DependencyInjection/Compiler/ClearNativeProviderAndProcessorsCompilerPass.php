@@ -14,7 +14,7 @@ final class ClearNativeProviderAndProcessorsCompilerPass implements CompilerPass
         foreach (['api_platform.state_provider', 'api_platform.state_processor'] as $tag) {
             foreach (array_keys($container->findTaggedServiceIds($tag)) as $id) {
                 $definition = $container->findDefinition($id);
-                if (!preg_match('/^App\\\Infrastructure/', $definition->getClass())) {
+                if ($definition->getClass() && !preg_match('/^App\\\Infrastructure/', $definition->getClass())) {
                     $definition->clearTag($tag);
                 }
             }

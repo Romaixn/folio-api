@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Project\InMemory;
 
-use Symfony\Component\Uid\Uuid;
 use App\Domain\Project\Model\Project;
-use App\Infrastructure\Shared\InMemory\InMemoryRepository;
 use App\Domain\Project\Repository\ProjectRepositoryInterface;
+use App\Infrastructure\Shared\InMemory\InMemoryRepository;
+use Symfony\Component\Uid\Uuid;
 
 final class InMemoryProjectRepository extends InMemoryRepository implements ProjectRepositoryInterface
 {
@@ -29,10 +29,5 @@ final class InMemoryProjectRepository extends InMemoryRepository implements Proj
     public function ofSlug(string $slug): ?Project
     {
         return $this->entities[(string) $slug] ?? null;
-    }
-
-    public function withCategory(string $category): static
-    {
-        return $this->filter(fn (Project $project) => $project->category === $category);
     }
 }
