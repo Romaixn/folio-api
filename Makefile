@@ -56,6 +56,7 @@ cc: sf
 test: export APP_ENV=test
 test: ## Run PHPUnit tests
 	@$(SYMFONY) doctrine:database:create --env=test
+	@$(SYMFONY) doctrine:schema:update --force --env=test
 	@$(SYMFONY) doctrine:migrations:migrate -n --env=test
 	@$(PHP) bin/phpunit
 
