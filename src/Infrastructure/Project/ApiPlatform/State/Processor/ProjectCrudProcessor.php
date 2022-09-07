@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Project\ApiPlatform\State\Processor;
 
-use Webmozart\Assert\Assert;
-use Symfony\Component\Uid\Uuid;
-use ApiPlatform\Metadata\Operation;
-use App\Domain\Project\Model\Project;
-use ApiPlatform\State\ProcessorInterface;
 use ApiPlatform\Metadata\DeleteOperationInterface;
-use App\Application\Shared\Command\CommandBusInterface;
+use ApiPlatform\Metadata\Operation;
+use ApiPlatform\State\ProcessorInterface;
 use App\Application\Project\Command\CreateProjectCommand;
 use App\Application\Project\Command\DeleteProjectCommand;
 use App\Application\Project\Command\UpdateProjectCommand;
+use App\Application\Shared\Command\CommandBusInterface;
+use App\Domain\Project\Model\Project;
 use App\Infrastructure\Project\ApiPlatform\Resource\ProjectResource;
+use Symfony\Component\Uid\Uuid;
+use Webmozart\Assert\Assert;
 
 final class ProjectCrudProcessor implements ProcessorInterface
 {

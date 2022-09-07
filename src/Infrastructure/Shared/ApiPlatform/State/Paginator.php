@@ -13,14 +13,14 @@ use ApiPlatform\State\Pagination\PaginatorInterface;
 final class Paginator implements PaginatorInterface, \IteratorAggregate
 {
     /**
-     * @param iterable<T>
+     * @param iterable<T> $items
      */
     public function __construct(
-        private iterable $items,
-        private float $currentPage,
-        private float $itemsPerPage,
-        private float $lastPage,
-        private float $totalItems,
+        private readonly iterable $items,
+        private readonly float $currentPage,
+        private readonly float $itemsPerPage,
+        private readonly float $lastPage,
+        private readonly float $totalItems,
     ) {
     }
 

@@ -17,10 +17,6 @@ final class FindProjectsQueryHandler implements QueryHandlerInterface
     {
         $projectRepository = $this->projectRepository;
 
-        if (null !== $query->category) {
-            $projectRepository = $projectRepository->withCategory($query->category);
-        }
-
         if (null !== $query->page && null !== $query->itemsPerPage) {
             $projectRepository = $projectRepository->withPagination($query->page, $query->itemsPerPage);
         }

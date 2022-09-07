@@ -10,6 +10,7 @@ use Webmozart\Assert\Assert;
 
 abstract class InMemoryRepository implements RepositoryInterface
 {
+    /** @var object[] */
     protected array $entities = [];
 
     protected ?int $page = null;
