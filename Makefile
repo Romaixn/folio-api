@@ -9,11 +9,17 @@ PHP      = $(PHP_CONT) php
 COMPOSER = $(PHP_CONT) composer
 SYMFONY  = $(PHP_CONT) bin/console
 
+# Executables: vendors
+PHPUNIT       = ./bin/phpunit
+PHPSTAN       = ./vendor/bin/phpstan
+PHP_CS_FIXER  = ./vendor/bin/php-cs-fixer
+PHPMETRICS    = ./vendor/bin/phpmetrics
+
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        = help build up start down logs sh composer vendor sf cc test phpstan phpcs
+.PHONY        :
 
-## —— 🎵 🐳 The Symfony-docker Makefile 🐳 🎵 ——————————————————————————————————
+## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
 help: ## Outputs this help screen
 	@grep -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 
@@ -52,16 +58,25 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 cc: c=c:c ## Clear the cache
 cc: sf
 
-## —— PHPUnit 🧪 ———————————————————————————————————————————————————————————————
-test: export APP_ENV=test
-test: ## Run PHPUnit tests
-	@$(SYMFONY) doctrine:database:create --env=test
-	@$(SYMFONY) doctrine:schema:update --force --env=test
-	@$(PHP) bin/phpunit
+## —— Tests ✅ —————————————————————————————————————————————————————————————————
+test: ## Run tests with optionnal suite and filter
+	@$(eval testsuite ?= 'all')
+	@$(eval filter ?= '.')
+	@$(PHP_CONT) $(PHPUNIT) --testsuite=$(testsuite) --filter=$(filter) --stop-on-failure
 
-## —— Fixers 🔧 ———————————————————————————————————————————————————————————————
-phpstan: ## Run PHPStan
-	@$(PHP) vendor/bin/phpstan analyse -c phpstan.neon --no-progress --no-interaction
+test-all: ## Run all tests
+	@$(PHP_CONT) $(PHPUNIT) --stop-on-failure
 
-phpcs: ## Run PHP Code Sniffer
-	@$(PHP) vendor/bin/php-cs-fixer fix --allow-risky=yes
+## —— Coding standards ✨ ——————————————————————————————————————————————————————
+cs: lint-php ## Run all coding standards checks
+
+static-analysis: stan ## Run the static analysis (PHPStan)
+
+stan: ## Run PHPStan
+	@$(PHP_CONT) $(PHPSTAN) analyse --memory-limit 1G
+
+lint-php: ## Lint files with php-cs-fixer
+	@$(PHP_CONT) $(PHP_CS_FIXER) fix --allow-risky=yes --dry-run
+
+fix-php: ## Fix files with php-cs-fixer
+	@$(PHP_CONT) $(PHP_CS_FIXER) fix --allow-risky=yes
