@@ -11,7 +11,3 @@ services:
     environment:
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
-
-  database:
-    environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
