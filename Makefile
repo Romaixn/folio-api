@@ -1,67 +1,117 @@
-# Executables (local)
-DOCKER_COMP = docker compose
+.DEFAULT_GOAL := help
 
-# Docker containers
-PHP_CONT = $(DOCKER_COMP) exec php
+DC = docker compose
+EXEC = $(DC) exec php
+COMPOSER = $(EXEC) composer
 
-# Executables
-PHP      = $(PHP_CONT) php
-COMPOSER = $(PHP_CONT) composer
-SYMFONY  = $(PHP_CONT) bin/console
+ifndef CI_JOB_ID
+	GREEN  := $(shell tput -Txterm setaf 2)
+	YELLOW := $(shell tput -Txterm setaf 3)
+	RESET  := $(shell tput -Txterm sgr0)
+	TARGET_MAX_CHAR_NUM=30
+endif
 
-# Misc
-.DEFAULT_GOAL = help
-.PHONY        = help build up start down logs sh composer vendor sf cc test phpstan phpcs
+help:
+	@echo "API Platform DDD ${GREEN}example${RESET}"
+	@awk '/^[a-zA-Z\-\_0-9]+:/ { \
+		helpMessage = match(lastLine, /^## (.*)/); \
+		if (helpMessage) { \
+			helpCommand = substr($$1, 0, index($$1, ":")-1); \
+			helpMessage = substr(lastLine, RSTART + 3, RLENGTH); \
+			printf "  ${GREEN}%-$(TARGET_MAX_CHAR_NUM)s${RESET} %s\n", helpCommand, helpMessage; \
+		} \
+		isTopic = match(lastLine, /^###/); \
+	    if (isTopic) { \
+			topic = substr($$1, 0, index($$1, ":")-1); \
+			printf "\n${YELLOW}%s${RESET}\n", topic; \
+		} \
+	} { lastLine = $$0 }' $(MAKEFILE_LIST)
 
-## —— 🎵 🐳 The Symfony-docker Makefile 🐳 🎵 ——————————————————————————————————
-help: ## Outputs this help screen
-	@grep -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 
-## —— Docker 🐳 ————————————————————————————————————————————————————————————————
-build: ## Builds the Docker images
-	@$(DOCKER_COMP) build --pull --no-cache
 
-up: ## Start the docker hub in detached mode (no logs)
-	@$(DOCKER_COMP) up --detach
+#################################
+Project:
 
-start: build up ## Build and start the containers
+## Enter the application container
+php:
+	@$(EXEC) sh
 
-down: ## Stop the docker hub
-	@$(DOCKER_COMP) down --remove-orphans
+## Enter the database container
+database:
+	@$(DC) exec database psql -Usymfony app
 
-logs: ## Show live logs
-	@$(DOCKER_COMP) logs --tail=0 --follow
+## Install the whole dev environment
+install:
+	@$(DC) build --pull --no-cache
+	@$(MAKE) start -s
+	@$(MAKE) vendor -s
+	@$(MAKE) db-reset -s
 
-sh: ## Connect to the PHP FPM container
-	@$(PHP_CONT) sh
+## Install composer dependencies
+vendor:
+	@$(COMPOSER) install --optimize-autoloader
 
-## —— Composer 🧙 ——————————————————————————————————————————————————————————————
-composer: ## Run composer, pass the parameter "c=" to run a given command, example: make composer c='req symfony/orm-pack'
-	@$(eval c ?=)
-	@$(COMPOSER) $(c)
+## Start the project
+start:
+	@$(DC) up -d --remove-orphans --no-recreate
 
-vendor: ## Install vendors according to the current composer.lock file
-vendor: c=install --prefer-dist --no-dev --no-progress --no-scripts --no-interaction
-vendor: composer
+## Stop the project
+stop:
+	@$(DC) kill
+	@$(DC) rm -v --force
 
-## —— Symfony 🎵 ———————————————————————————————————————————————————————————————
-sf: ## List all Symfony commands or pass the parameter "c=" to run a given command, example: make sf c=about
-	@$(eval c ?=)
-	@$(SYMFONY) $(c)
+.PHONY: php database install vendor start stop
 
-cc: c=c:c ## Clear the cache
-cc: sf
+#################################
+Database:
 
-## —— PHPUnit 🧪 ———————————————————————————————————————————————————————————————
-test: export APP_ENV=test
-test: ## Run PHPUnit tests
-	@$(SYMFONY) doctrine:database:create --env=test
-	@$(SYMFONY) doctrine:migrations:migrate -n --env=test
-	@$(PHP) bin/phpunit
+## Create/Recreate the database
+db-create:
+	@$(EXEC) bin/console doctrine:database:drop --force --if-exists -nq
+	@$(EXEC) bin/console doctrine:database:create -nq
 
-## —— Fixers 🔧 ———————————————————————————————————————————————————————————————
-phpstan: ## Run PHPStan
-	@$(PHP) vendor/bin/phpstan analyse -c phpstan.neon --no-progress --no-interaction
+## Update database schema
+db-update:
+	@$(EXEC) bin/console doctrine:schema:update --force -nq
 
-phpcs: ## Run PHP Code Sniffer
-	@$(PHP) vendor/bin/php-cs-fixer fix --allow-risky=yes
+## Reset database
+db-reset: db-create db-update
+
+.PHONY: db-create db-update db-reset
+
+#################################
+Tests:
+
+## Run codestyle static analysis
+php-cs-fixer:
+	@$(EXEC) vendor/bin/php-cs-fixer fix --dry-run --diff
+
+## Run psalm static analysis
+psalm:
+	@$(EXEC) vendor/bin/psalm --show-info=true
+
+## Run code depedencies static analysis
+deptrac:
+	@echo "\n${YELLOW}Checking Bounded contexts...${RESET}"
+	@$(EXEC) vendor/bin/deptrac analyze --fail-on-uncovered --report-uncovered --no-progress --cache-file .deptrac_bc.cache --config-file deptrac_bc.yaml
+
+	@echo "\n${YELLOW}Checking Hexagonal layers...${RESET}"
+	@$(EXEC) vendor/bin/deptrac analyze --fail-on-uncovered --report-uncovered --no-progress --cache-file .deptrac_hexa.cache --config-file deptrac_hexa.yaml
+
+## Run phpunit tests
+phpunit:
+	@$(EXEC) bin/phpunit
+
+## Run either static analysis and tests
+ci: php-cs-fixer psalm deptrac phpunit
+
+.PHONY: php-cs-fixer psalm deptrac phpunit ci
+
+#################################
+Tools:
+
+## Fix PHP files to be compliant with coding standards
+fix-cs:
+	@$(EXEC) vendor/bin/php-cs-fixer fix
+
+.PHONY: fix-cs

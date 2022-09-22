@@ -1,0 +1,31 @@
+parameters:
+    paths:
+        - ./src
+
+    layers:
+        - name: Project
+          collectors:
+              - type: directory
+                regex: src/Project/.*
+
+        - name: Subscription
+          collectors:
+              - type: directory
+                regex: src/Subscription/.*
+
+        - name: Shared
+          collectors:
+              - type: directory
+                regex: src/Shared/.*
+
+        - name: Vendors
+          collectors:
+              - { type: className, regex: ^ApiPlatform\\ }
+              - { type: className, regex: ^Symfony\\ }
+              - { type: className, regex: ^Doctrine\\ }
+              - { type: className, regex: ^Webmozart\\ }
+
+    ruleset:
+        Project: [ Shared, Vendors ]
+        Subscription: [ Shared, Vendors ]
+        Shared: [ Vendors ]

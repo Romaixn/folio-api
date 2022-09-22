@@ -4,10 +4,9 @@ services:
   php:
     build:
       context: .
-      target: symfony_php
+      target: app_php
       args:
         SYMFONY_VERSION: ${SYMFONY_VERSION:-}
-        SKELETON: ${SKELETON:-symfony/skeleton}
         STABILITY: ${STABILITY:-stable}
     restart: unless-stopped
     volumes:
@@ -19,7 +18,7 @@ services:
       start_period: 30s
     environment:
       # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
-      DATABASE_URL: postgresql://${POSTGRES_USER:-symfony}:${POSTGRES_PASSWORD:-ChangeMe}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-13}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-symfony}:${POSTGRES_PASSWORD:-!ChangeMe!}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-14}
       # Run "composer require symfony/mercure-bundle" to install and configure the Mercure integration
       MERCURE_URL: ${CADDY_MERCURE_URL:-http://caddy/.well-known/mercure}
       MERCURE_PUBLIC_URL: https://${SERVER_NAME:-localhost}/.well-known/mercure
@@ -28,7 +27,7 @@ services:
   caddy:
     build:
       context: .
-      target: symfony_caddy
+      target: app_caddy
     depends_on:
       - php
     environment:
@@ -60,41 +59,15 @@ services:
 
 ###> doctrine/doctrine-bundle ###
   database:
-    image: postgres:${POSTGRES_VERSION:-13}-alpine
+    image: postgres:${POSTGRES_VERSION:-14}-alpine
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-app}
       # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ChangeMe}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
       POSTGRES_USER: ${POSTGRES_USER:-symfony}
     volumes:
       - db-data:/var/lib/postgresql/data:rw
-      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/postgresql/data:rw
 ###< doctrine/doctrine-bundle ###
-
-  consumer:
-    build:
-      context: .
-      target: symfony_php
-    entrypoint: docker-php-entrypoint
-    command: bin/console messenger:consume
-    depends_on:
-      - database
-    restart: unless-stopped
-    volumes:
-      - ./:/srv/app:rw,cached
-      - ./docker/php/conf.d/symfony.dev.ini:/usr/local/etc/php/conf.d/symfony.ini
-      # if you develop on Linux, you may use a bind-mounted host directory instead
-      # - ./api/var:/srv/api/var:rw
-    environment:
-      APP_ENV: dev
-    healthcheck:
-      test: ['CMD', 'ps', 'aux', '|', 'egrep', '"\d+:\d+ php bin/console messenger:consume"']
-      interval: 10s
-      timeout: 3s
-      retries: 3
-      start_period: 30s
-
 
 volumes:
   php_socket:
