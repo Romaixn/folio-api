@@ -1,6 +1,6 @@
 parameters:
     paths:
-        - ./src/BookStore
+        - ./src/Project
         - ./src/Shared
 
     layers:
