@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use App\BookStore\Domain\Repository\BookRepositoryInterface;
-use App\BookStore\Infrastructure\Doctrine\DoctrineBookRepository;
-use App\BookStore\Infrastructure\InMemory\InMemoryBookRepository;
+use App\Project\Domain\Repository\ProjectRepositoryInterface;
+use App\Project\Infrastructure\Doctrine\DoctrineProjectRepository;
+use App\Project\Infrastructure\InMemory\InMemoryProjectRepository;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -15,12 +15,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autoconfigure();
 
     // repositories
-    $services->set(BookRepositoryInterface::class)
-        ->class(InMemoryBookRepository::class);
+    $services->set(ProjectRepositoryInterface::class)
+        ->class(InMemoryProjectRepository::class);
 
-    $services->set(InMemoryBookRepository::class)
+    $services->set(InMemoryProjectRepository::class)
         ->public();
 
-    $services->set(DoctrineBookRepository::class)
+    $services->set(DoctrineProjectRepository::class)
         ->public();
 };
