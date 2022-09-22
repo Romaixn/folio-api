@@ -24,9 +24,6 @@
   <testsuite name="Shared">
     <directory>tests/Shared</directory>
   </testsuite>
-  <testsuite name="Subscription">
-    <directory>tests/Subscription</directory>
-  </testsuite>
 </testsuites>
 
 <coverage processUncoveredFiles="true">
