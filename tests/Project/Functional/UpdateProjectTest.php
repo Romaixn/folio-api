@@ -6,7 +6,6 @@ namespace App\Tests\Project\Functional;
 
 use App\Project\Application\Command\UpdateProjectCommand;
 use App\Project\Domain\Repository\ProjectRepositoryInterface;
-use App\Project\Domain\ValueObject\ProjectContent;
 use App\Project\Domain\ValueObject\ProjectExcerpt;
 use App\Project\Domain\ValueObject\ProjectTitle;
 use App\Shared\Application\Command\CommandBusInterface;
@@ -25,22 +24,19 @@ final class UpdateProjectTest extends KernelTestCase
 
         $initialProject = DummyProjectFactory::createProject(
             title: 'title',
-            excerpt: 'excerpt',
-            content: 'content'
+            excerpt: 'excerpt'
         );
 
         $projectRepository->save($initialProject);
 
         $commandBus->dispatch(new UpdateProjectCommand(
             $initialProject->id,
-            title: new ProjectTitle('newTitle'),
-            content: new ProjectContent('newContent')
+            title: new ProjectTitle('newTitle')
         ));
 
         $project = $projectRepository->ofId($initialProject->id);
 
         static::assertEquals(new ProjectTitle('newTitle'), $project->title);
         static::assertEquals(new ProjectExcerpt('excerpt'), $project->excerpt);
-        static::assertEquals(new ProjectContent('newContent'), $project->content);
     }
 }

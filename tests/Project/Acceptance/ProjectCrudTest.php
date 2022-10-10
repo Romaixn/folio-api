@@ -6,7 +6,6 @@ namespace App\Tests\Project\Acceptance;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Project\Domain\Repository\ProjectRepositoryInterface;
-use App\Project\Domain\ValueObject\ProjectContent;
 use App\Project\Domain\ValueObject\ProjectExcerpt;
 use App\Project\Domain\ValueObject\ProjectId;
 use App\Project\Domain\ValueObject\ProjectTitle;
@@ -51,8 +50,7 @@ final class ProjectCrudTest extends ApiTestCase
 
         $project = DummyProjectFactory::createProject(
             title: 'title',
-            excerpt: 'excerpt',
-            content: 'content',
+            excerpt: 'excerpt'
         );
         $projectRepository->save($project);
 
@@ -64,7 +62,6 @@ final class ProjectCrudTest extends ApiTestCase
         static::assertJsonContains([
             'title' => 'title',
             'excerpt' => 'excerpt',
-            'content' => 'content',
         ]);
     }
 
@@ -86,7 +83,6 @@ final class ProjectCrudTest extends ApiTestCase
         static::assertJsonContains([
             'title' => 'title',
             'excerpt' => 'excerpt',
-            'content' => 'content',
         ]);
 
         $id = new ProjectId(Uuid::fromString(str_replace('/api/projects/', '', $response->toArray()['@id'])));
@@ -97,7 +93,6 @@ final class ProjectCrudTest extends ApiTestCase
         static::assertEquals($id, $project->id);
         static::assertEquals(new ProjectTitle('title'), $project->title);
         static::assertEquals(new ProjectExcerpt('excerpt'), $project->excerpt);
-        static::assertEquals(new ProjectContent('content'), $project->content);
     }
 
     public function testCannotCreateProjectWithoutValidPayload(): void
@@ -108,7 +103,6 @@ final class ProjectCrudTest extends ApiTestCase
             'json' => [
                 'title' => '',
                 'excerpt' => '',
-                'content' => '',
             ],
         ]);
 
@@ -117,7 +111,6 @@ final class ProjectCrudTest extends ApiTestCase
             'violations' => [
                 ['propertyPath' => 'title', 'message' => 'This value is too short. It should have 1 character or more.'],
                 ['propertyPath' => 'excerpt', 'message' => 'This value is too short. It should have 1 character or more.'],
-                ['propertyPath' => 'content', 'message' => 'This value is too short. It should have 1 character or more.'],
             ],
         ]);
 
@@ -130,7 +123,6 @@ final class ProjectCrudTest extends ApiTestCase
             'violations' => [
                 ['propertyPath' => 'title', 'message' => 'This value should not be null.'],
                 ['propertyPath' => 'excerpt', 'message' => 'This value should not be null.'],
-                ['propertyPath' => 'content', 'message' => 'This value should not be null.'],
             ],
         ]);
     }
@@ -149,7 +141,6 @@ final class ProjectCrudTest extends ApiTestCase
             'json' => [
                 'title' => 'newTitle',
                 'excerpt' => 'newExcerpt',
-                'content' => 'newContent',
             ],
         ]);
 
@@ -159,7 +150,6 @@ final class ProjectCrudTest extends ApiTestCase
         static::assertJsonContains([
             'title' => 'newTitle',
             'excerpt' => 'newExcerpt',
-            'content' => 'newContent',
         ]);
 
         $updatedProject = $projectRepository->ofId($project->id);
@@ -167,7 +157,6 @@ final class ProjectCrudTest extends ApiTestCase
         static::assertNotNull($project);
         static::assertEquals(new ProjectTitle('newTitle'), $updatedProject->title);
         static::assertEquals(new ProjectExcerpt('newExcerpt'), $updatedProject->excerpt);
-        static::assertEquals(new ProjectContent('newContent'), $updatedProject->content);
     }
 
     public function testPartiallyUpdateProject(): void

@@ -63,9 +63,11 @@ final class ProjectResource
         #[Assert\Length(min: 1, max: 1023, groups: ['create', 'Default'])]
         public ?string $excerpt = null,
 
-        #[Assert\NotNull(groups: ['create'])]
-        #[Assert\Length(min: 1, max: 65535, groups: ['create', 'Default'])]
-        public ?string $content = null,
+        #[Assert\Length(min: 1, max: 1023, groups: ['create', 'Default'])]
+        public ?string $logo = null,
+
+        #[Assert\Length(min: 1, max: 255, groups: ['create', 'Default'])]
+        public ?string $link = null,
     ) {
     }
 
@@ -75,7 +77,8 @@ final class ProjectResource
             $project->id->value,
             $project->title->value,
             $project->excerpt->value,
-            $project->content->value,
+            $project->logo?->value,
+            $project->link?->value,
         );
     }
 }

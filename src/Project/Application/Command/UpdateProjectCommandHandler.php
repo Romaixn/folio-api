@@ -24,7 +24,8 @@ final class UpdateProjectCommandHandler implements CommandHandlerInterface
 
         $project->title = $command->title ?? $project->title;
         $project->excerpt = $command->excerpt ?? $project->excerpt;
-        $project->content = $command->content ?? $project->content;
+        $project->logo = $command->logo ?? $project->logo;
+        $project->link = $command->link ?? $project->link;
 
         $this->projectRepository->save($project);
 
