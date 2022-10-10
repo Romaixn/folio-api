@@ -8,9 +8,10 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Project\Application\Command\UpdateProjectCommand;
 use App\Project\Domain\Model\Project;
-use App\Project\Domain\ValueObject\ProjectContent;
 use App\Project\Domain\ValueObject\ProjectExcerpt;
 use App\Project\Domain\ValueObject\ProjectId;
+use App\Project\Domain\ValueObject\ProjectLink;
+use App\Project\Domain\ValueObject\ProjectLogo;
 use App\Project\Domain\ValueObject\ProjectTitle;
 use App\Project\Infrastructure\ApiPlatform\Resource\ProjectResource;
 use App\Shared\Application\Command\CommandBusInterface;
@@ -19,7 +20,7 @@ use Webmozart\Assert\Assert;
 final class UpdateProjectProcessor implements ProcessorInterface
 {
     public function __construct(
-        private CommandBusInterface $commandBus,
+        private readonly CommandBusInterface $commandBus,
     ) {
     }
 
@@ -36,7 +37,8 @@ final class UpdateProjectProcessor implements ProcessorInterface
             new ProjectId($data->id),
             null !== $data->title ? new ProjectTitle($data->title) : null,
             null !== $data->excerpt ? new ProjectExcerpt($data->excerpt) : null,
-            null !== $data->content ? new ProjectContent($data->content) : null,
+            null !== $data->logo ? new ProjectLogo($data->logo) : null,
+            null !== $data->link ? new ProjectLink($data->link) : null,
         );
 
         /** @var Project $model */

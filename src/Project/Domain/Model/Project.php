@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Project\Domain\Model;
 
-use App\Project\Domain\ValueObject\ProjectContent;
 use App\Project\Domain\ValueObject\ProjectExcerpt;
 use App\Project\Domain\ValueObject\ProjectId;
+use App\Project\Domain\ValueObject\ProjectLink;
+use App\Project\Domain\ValueObject\ProjectLogo;
 use App\Project\Domain\ValueObject\ProjectTitle;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,7 +25,10 @@ class Project
         public ProjectExcerpt $excerpt,
 
         #[ORM\Embedded(columnPrefix: false)]
-        public ProjectContent $content,
+        public ?ProjectLogo $logo,
+
+        #[ORM\Embedded(columnPrefix: false)]
+        public ?ProjectLink $link
     ) {
         $this->id = new ProjectId();
     }

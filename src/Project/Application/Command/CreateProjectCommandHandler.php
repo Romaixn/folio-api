@@ -19,7 +19,8 @@ final class CreateProjectCommandHandler implements CommandHandlerInterface
         $project = new Project(
             $command->title,
             $command->excerpt,
-            $command->content,
+            $command->logo ?? null,
+            $command->link ?? null,
         );
 
         $this->projectRepository->save($project);

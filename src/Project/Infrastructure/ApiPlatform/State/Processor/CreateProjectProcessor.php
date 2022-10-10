@@ -8,8 +8,9 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Project\Application\Command\CreateProjectCommand;
 use App\Project\Domain\Model\Project;
-use App\Project\Domain\ValueObject\ProjectContent;
 use App\Project\Domain\ValueObject\ProjectExcerpt;
+use App\Project\Domain\ValueObject\ProjectLink;
+use App\Project\Domain\ValueObject\ProjectLogo;
 use App\Project\Domain\ValueObject\ProjectTitle;
 use App\Project\Infrastructure\ApiPlatform\Resource\ProjectResource;
 use App\Shared\Application\Command\CommandBusInterface;
@@ -18,7 +19,7 @@ use Webmozart\Assert\Assert;
 final class CreateProjectProcessor implements ProcessorInterface
 {
     public function __construct(
-        private CommandBusInterface $commandBus,
+        private readonly CommandBusInterface $commandBus,
     ) {
     }
 
@@ -33,12 +34,12 @@ final class CreateProjectProcessor implements ProcessorInterface
 
         Assert::notNull($data->title);
         Assert::notNull($data->excerpt);
-        Assert::notNull($data->content);
 
         $command = new CreateProjectCommand(
             new ProjectTitle($data->title),
             new ProjectExcerpt($data->excerpt),
-            new ProjectContent($data->content),
+            new ProjectLogo($data->logo ?? null),
+            new ProjectLink($data->link ?? null),
         );
 
         /** @var Project $model */
