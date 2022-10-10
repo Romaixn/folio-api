@@ -28,10 +28,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'versions' => [3],
         ],
         'exception_to_status' => [
-            // TODO
-            // We must trigger the API Platform validator before the data transforming.
-            // Let's create an API Platform PR to update the AbstractItemNormalizer.
-            // In that way, this exception won't be raised anymore as payload will be validated (see DiscountBookPayload).
             InvalidArgumentException::class => 422,
         ],
         'eager_loading' => [
