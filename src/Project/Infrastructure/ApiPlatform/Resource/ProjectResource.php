@@ -67,6 +67,7 @@ final class ProjectResource
         public ?string $logo = null,
 
         #[Assert\Length(min: 1, max: 255, groups: ['create', 'Default'])]
+        #[Assert\Url(groups: ['create', 'Default'])]
         public ?string $link = null,
     ) {
     }

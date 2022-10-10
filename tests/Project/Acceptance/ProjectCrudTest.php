@@ -73,7 +73,6 @@ final class ProjectCrudTest extends ApiTestCase
             'json' => [
                 'title' => 'title',
                 'excerpt' => 'excerpt',
-                'content' => 'content',
             ],
         ]);
 
@@ -103,6 +102,7 @@ final class ProjectCrudTest extends ApiTestCase
             'json' => [
                 'title' => '',
                 'excerpt' => '',
+                'link' => 'example.com',
             ],
         ]);
 
@@ -111,6 +111,7 @@ final class ProjectCrudTest extends ApiTestCase
             'violations' => [
                 ['propertyPath' => 'title', 'message' => 'This value is too short. It should have 1 character or more.'],
                 ['propertyPath' => 'excerpt', 'message' => 'This value is too short. It should have 1 character or more.'],
+                ['propertyPath' => 'link', 'message' => 'This value is not a valid URL.'],
             ],
         ]);
 
