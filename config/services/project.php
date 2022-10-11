@@ -3,12 +3,9 @@
 declare(strict_types=1);
 
 use App\Project\Domain\Repository\ProjectRepositoryInterface;
-use App\Project\Infrastructure\ApiPlatform\State\Processor\AnonymizeBooksProcessor;
 use App\Project\Infrastructure\ApiPlatform\State\Processor\CreateProjectProcessor;
 use App\Project\Infrastructure\ApiPlatform\State\Processor\DeleteProjectProcessor;
-use App\Project\Infrastructure\ApiPlatform\State\Processor\DiscountBookProcessor;
 use App\Project\Infrastructure\ApiPlatform\State\Processor\UpdateProjectProcessor;
-use App\Project\Infrastructure\ApiPlatform\State\Provider\CheapestBooksProvider;
 use App\Project\Infrastructure\ApiPlatform\State\Provider\ProjectCollectionProvider;
 use App\Project\Infrastructure\ApiPlatform\State\Provider\ProjectItemProvider;
 use App\Project\Infrastructure\Doctrine\DoctrineProjectRepository;
@@ -24,10 +21,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->load('App\\Project\\', __DIR__.'/../../src/Project');
 
     // providers
-    $services->set(CheapestBooksProvider::class)
-        ->autoconfigure(false)
-        ->tag('api_platform.state_provider', ['priority' => 1]);
-
     $services->set(ProjectItemProvider::class)
         ->autoconfigure(false)
         ->tag('api_platform.state_provider', ['priority' => 0]);
@@ -37,14 +30,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('api_platform.state_provider', ['priority' => 0]);
 
     // processors
-    $services->set(AnonymizeBooksProcessor::class)
-        ->autoconfigure(false)
-        ->tag('api_platform.state_processor', ['priority' => 1]);
-
-    $services->set(DiscountBookProcessor::class)
-        ->autoconfigure(false)
-        ->tag('api_platform.state_processor', ['priority' => 1]);
-
     $services->set(CreateProjectProcessor::class)
         ->autoconfigure(false)
         ->tag('api_platform.state_processor', ['priority' => 0]);
