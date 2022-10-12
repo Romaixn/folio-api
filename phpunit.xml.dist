@@ -18,12 +18,15 @@
 </php>
 
 <testsuites>
-  <testsuite name="Project">
-    <directory>tests/Project</directory>
-  </testsuite>
-  <testsuite name="Shared">
-    <directory>tests/Shared</directory>
-  </testsuite>
+    <testsuite name="Project">
+        <directory>tests/Project</directory>
+    </testsuite>
+    <testsuite name="Shared">
+        <directory>tests/Shared</directory>
+    </testsuite>
+    <testsuite name="Contact">
+        <directory>tests/Contact</directory>
+    </testsuite>
 </testsuites>
 
 <coverage processUncoveredFiles="true">
