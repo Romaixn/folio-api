@@ -19,6 +19,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'mapping' => [
             'paths' => [
                 '%kernel.project_dir%/src/Project/Infrastructure/ApiPlatform/Resource/',
+                '%kernel.project_dir%/src/Contact/Entity/',
             ],
         ],
         'patch_formats' => [
