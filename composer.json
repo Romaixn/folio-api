@@ -97,7 +97,7 @@
         "justinrainbow/json-schema": "^5.2",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-symfony": "^4.0",
-        "qossmic/deptrac-shim": "^0.24.0",
+        "qossmic/deptrac-shim": "^1.0.0",
         "symfony/browser-kit": "6.1.*",
         "symfony/css-selector": "6.1.*",
         "symfony/debug-bundle": "6.1.*",
