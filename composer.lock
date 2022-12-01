@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b68d2d1ce83f20a285c2960cb7e419ed",
+    "content-hash": "f584b43370798c2ce377d49560da5116",
     "packages": [
         {
             "name": "api-platform/core",
@@ -3858,16 +3858,16 @@
         },
         {
             "name": "symfony/messenger",
-            "version": "v6.1.8",
+            "version": "v6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/messenger.git",
-                "reference": "06b5b5e0250b6f53311a253c61a4781c6a679a0b"
+                "reference": "c1609b6689b07890e94cf3016396f550c5feeee9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/messenger/zipball/06b5b5e0250b6f53311a253c61a4781c6a679a0b",
-                "reference": "06b5b5e0250b6f53311a253c61a4781c6a679a0b",
+                "url": "https://api.github.com/repos/symfony/messenger/zipball/c1609b6689b07890e94cf3016396f550c5feeee9",
+                "reference": "c1609b6689b07890e94cf3016396f550c5feeee9",
                 "shasum": ""
             },
             "require": {
@@ -3889,6 +3889,7 @@
                 "symfony/http-kernel": "^5.4|^6.0",
                 "symfony/process": "^5.4|^6.0",
                 "symfony/property-access": "^5.4|^6.0",
+                "symfony/rate-limiter": "^5.4|^6.0",
                 "symfony/routing": "^5.4|^6.0",
                 "symfony/serializer": "^5.4|^6.0",
                 "symfony/service-contracts": "^1.1|^2|^3",
@@ -3924,7 +3925,7 @@
             "description": "Helps applications send and receive messages to/from other applications or via message queues",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/messenger/tree/v6.1.8"
+                "source": "https://github.com/symfony/messenger/tree/v6.2.0"
             },
             "funding": [
                 {
@@ -3940,7 +3941,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-11-14T10:13:26+00:00"
+            "time": "2022-11-14T10:13:36+00:00"
         },
         {
             "name": "symfony/mime",
