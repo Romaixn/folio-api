@@ -7,7 +7,6 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->extension('security', [
-        'enable_authenticator_manager' => true,
         'password_hashers' => [
             PasswordAuthenticatedUserInterface::class => 'auto',
         ],
