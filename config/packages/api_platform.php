@@ -36,6 +36,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'force_eager' => false,
         ],
         'defaults' => [
+            'extra_properties' => [
+                'standard_put' => true,
+            ],
             'stateless' => false,
             'cache_headers' => [
                 'vary' => ['Content-Type', 'Authorization', 'Origin'],
