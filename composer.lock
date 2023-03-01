@@ -2464,16 +2464,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v6.2.5",
+            "version": "v6.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "f31b3c78a3650157188a240695e688d6a182aa91"
+                "reference": "249271da6f545d6579e0663374f8249a80be2893"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/f31b3c78a3650157188a240695e688d6a182aa91",
-                "reference": "f31b3c78a3650157188a240695e688d6a182aa91",
+                "url": "https://api.github.com/repos/symfony/config/zipball/249271da6f545d6579e0663374f8249a80be2893",
+                "reference": "249271da6f545d6579e0663374f8249a80be2893",
                 "shasum": ""
             },
             "require": {
@@ -2521,7 +2521,7 @@
             "description": "Helps you find, load, combine, autofill and validate configuration values of any kind",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/config/tree/v6.2.5"
+                "source": "https://github.com/symfony/config/tree/v6.2.7"
             },
             "funding": [
                 {
@@ -2537,7 +2537,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-09T04:38:22+00:00"
+            "time": "2023-02-14T08:44:56+00:00"
         },
         {
             "name": "symfony/console",
@@ -3276,16 +3276,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v6.2.5",
+            "version": "v6.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "e59e8a4006afd7f5654786a83b4fcb8da98f4593"
+                "reference": "82b6c62b959f642d000456f08c6d219d749215b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/e59e8a4006afd7f5654786a83b4fcb8da98f4593",
-                "reference": "e59e8a4006afd7f5654786a83b4fcb8da98f4593",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/82b6c62b959f642d000456f08c6d219d749215b3",
+                "reference": "82b6c62b959f642d000456f08c6d219d749215b3",
                 "shasum": ""
             },
             "require": {
@@ -3319,7 +3319,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v6.2.5"
+                "source": "https://github.com/symfony/filesystem/tree/v6.2.7"
             },
             "funding": [
                 {
@@ -3335,7 +3335,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-20T17:45:48+00:00"
+            "time": "2023-02-14T08:44:56+00:00"
         },
         {
             "name": "symfony/finder",
@@ -4221,16 +4221,16 @@
         },
         {
             "name": "symfony/password-hasher",
-            "version": "v6.2.5",
+            "version": "v6.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/password-hasher.git",
-                "reference": "56aabf1c3f579c109b573d45a00a272d6abdfc81"
+                "reference": "67820d8570bf1c2c2cd87cb76d9d12a9d52ab808"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/password-hasher/zipball/56aabf1c3f579c109b573d45a00a272d6abdfc81",
-                "reference": "56aabf1c3f579c109b573d45a00a272d6abdfc81",
+                "url": "https://api.github.com/repos/symfony/password-hasher/zipball/67820d8570bf1c2c2cd87cb76d9d12a9d52ab808",
+                "reference": "67820d8570bf1c2c2cd87cb76d9d12a9d52ab808",
                 "shasum": ""
             },
             "require": {
@@ -4273,7 +4273,7 @@
                 "password"
             ],
             "support": {
-                "source": "https://github.com/symfony/password-hasher/tree/v6.2.5"
+                "source": "https://github.com/symfony/password-hasher/tree/v6.2.7"
             },
             "funding": [
                 {
@@ -4289,7 +4289,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-01T08:38:09+00:00"
+            "time": "2023-02-14T08:44:56+00:00"
         },
         {
             "name": "symfony/polyfill-intl-grapheme",
@@ -5109,16 +5109,16 @@
         },
         {
             "name": "symfony/security-bundle",
-            "version": "v6.2.6",
+            "version": "v6.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-bundle.git",
-                "reference": "f3feb140c13015adecbeb51d49e45256aaf8a140"
+                "reference": "601bcc14b6e8c168dc5985d31cfdfd11bd07b50b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/f3feb140c13015adecbeb51d49e45256aaf8a140",
-                "reference": "f3feb140c13015adecbeb51d49e45256aaf8a140",
+                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/601bcc14b6e8c168dc5985d31cfdfd11bd07b50b",
+                "reference": "601bcc14b6e8c168dc5985d31cfdfd11bd07b50b",
                 "shasum": ""
             },
             "require": {
@@ -5189,7 +5189,7 @@
             "description": "Provides a tight integration of the Security component into the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-bundle/tree/v6.2.6"
+                "source": "https://github.com/symfony/security-bundle/tree/v6.2.7"
             },
             "funding": [
                 {
@@ -5205,20 +5205,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-30T15:46:28+00:00"
+            "time": "2023-02-21T12:32:47+00:00"
         },
         {
             "name": "symfony/security-core",
-            "version": "v6.2.5",
+            "version": "v6.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-core.git",
-                "reference": "3a26ddeda71fbbc6419578af526f4130cea3cc38"
+                "reference": "5dd5509ec58bf30c98811681870f58e7f5918bbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-core/zipball/3a26ddeda71fbbc6419578af526f4130cea3cc38",
-                "reference": "3a26ddeda71fbbc6419578af526f4130cea3cc38",
+                "url": "https://api.github.com/repos/symfony/security-core/zipball/5dd5509ec58bf30c98811681870f58e7f5918bbe",
+                "reference": "5dd5509ec58bf30c98811681870f58e7f5918bbe",
                 "shasum": ""
             },
             "require": {
@@ -5280,7 +5280,7 @@
             "description": "Symfony Security Component - Core Library",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-core/tree/v6.2.5"
+                "source": "https://github.com/symfony/security-core/tree/v6.2.7"
             },
             "funding": [
                 {
@@ -5296,20 +5296,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-24T13:16:10+00:00"
+            "time": "2023-02-17T11:05:34+00:00"
         },
         {
             "name": "symfony/security-csrf",
-            "version": "v6.2.5",
+            "version": "v6.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-csrf.git",
-                "reference": "4abbe66efe965bec1dc0ea04b72c361971c4000d"
+                "reference": "6cce7efdce68e0670d2f19acebc21dcd0798e333"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-csrf/zipball/4abbe66efe965bec1dc0ea04b72c361971c4000d",
-                "reference": "4abbe66efe965bec1dc0ea04b72c361971c4000d",
+                "url": "https://api.github.com/repos/symfony/security-csrf/zipball/6cce7efdce68e0670d2f19acebc21dcd0798e333",
+                "reference": "6cce7efdce68e0670d2f19acebc21dcd0798e333",
                 "shasum": ""
             },
             "require": {
@@ -5351,7 +5351,7 @@
             "description": "Symfony Security Component - CSRF Library",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-csrf/tree/v6.2.5"
+                "source": "https://github.com/symfony/security-csrf/tree/v6.2.7"
             },
             "funding": [
                 {
@@ -5367,20 +5367,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-20T18:25:26+00:00"
+            "time": "2023-02-16T09:57:23+00:00"
         },
         {
             "name": "symfony/security-http",
-            "version": "v6.2.6",
+            "version": "v6.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-http.git",
-                "reference": "77c95eada3e3f0bf3a50f89817a18819b357376e"
+                "reference": "0b96e76243877b53e9ff1418f9e538ecf480dd69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-http/zipball/77c95eada3e3f0bf3a50f89817a18819b357376e",
-                "reference": "77c95eada3e3f0bf3a50f89817a18819b357376e",
+                "url": "https://api.github.com/repos/symfony/security-http/zipball/0b96e76243877b53e9ff1418f9e538ecf480dd69",
+                "reference": "0b96e76243877b53e9ff1418f9e538ecf480dd69",
                 "shasum": ""
             },
             "require": {
@@ -5436,7 +5436,7 @@
             "description": "Symfony Security Component - HTTP Integration",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-http/tree/v6.2.6"
+                "source": "https://github.com/symfony/security-http/tree/v6.2.7"
             },
             "funding": [
                 {
@@ -5452,7 +5452,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-30T15:46:28+00:00"
+            "time": "2023-02-28T10:56:03+00:00"
         },
         {
             "name": "symfony/serializer",
