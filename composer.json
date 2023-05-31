@@ -37,7 +37,7 @@
         "symfony/twig-bundle": "6.2.*",
         "symfony/uid": "6.3.*",
         "symfony/validator": "6.2.*",
-        "symfony/yaml": "6.2.*",
+        "symfony/yaml": "6.3.*",
         "webmozart/assert": "^1.10"
     },
     "config": {
