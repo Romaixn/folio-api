@@ -33,7 +33,7 @@
         "symfony/proxy-manager-bridge": "6.4.*",
         "symfony/runtime": "6.4.*",
         "symfony/security-bundle": "6.3.*",
-        "symfony/serializer": "6.3.*",
+        "symfony/serializer": "6.4.*",
         "symfony/twig-bundle": "6.3.*",
         "symfony/uid": "6.4.*",
         "symfony/validator": "6.4.*",
